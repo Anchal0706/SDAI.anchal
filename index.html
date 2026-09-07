@@ -1,17 +1,19 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Anchal Mishra - AI Trainer &amp; Content Strategist</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet"
   />
+
   <link
     href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33"
     rel="stylesheet"
@@ -22,25 +24,25 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+      background: #000;
+    }
+
     html,
     body {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       margin: 0;
-      overflow: hidden;
-      background: #000;
     }
 
     body {
       font-family: "Inter", sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      color: #fff;
-    }
-
-    button,
-    a {
-      font: inherit;
     }
 
     a {
@@ -52,95 +54,234 @@
       border: 0;
       background: none;
       color: inherit;
-      padding: 0;
+      font: inherit;
       cursor: pointer;
     }
 
     .page {
       position: relative;
       width: 100%;
-      height: 100vh;
-      height: 100svh;
-      overflow: hidden;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow-x: hidden;
       background: #000;
-      color: #fff;
     }
 
+    /* =========================================================
+       BACKGROUND VIDEO
+    ========================================================= */
+
     .background-video {
-      position: absolute;
+      position: fixed;
       inset: 0;
+      z-index: 0;
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
-      z-index: 0;
+      object-position: center center;
+
+      pointer-events: none;
+
+      filter: brightness(0.72) contrast(1.08);
     }
+
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.58) 34%,
+          rgba(0, 0, 0, 0.18) 68%,
+          rgba(0, 0, 0, 0.42) 100%
+        );
+    }
+
+    .bottom-overlay {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      height: 52vh;
+
+      z-index: 2;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.98) 0%,
+          rgba(0, 0, 0, 0.78) 28%,
+          rgba(0, 0, 0, 0.15) 75%,
+          transparent 100%
+        );
+    }
+
+    /* =========================================================
+       CONTENT
+    ========================================================= */
 
     .content {
       position: relative;
       z-index: 10;
+
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+
       display: flex;
       flex-direction: column;
-      width: 100%;
-      height: 100%;
-      padding-left: 20px;
-      padding-right: 20px;
+
+      padding:
+        24px
+        clamp(20px, 4vw, 64px)
+        28px;
     }
 
-    .font-pixel {
+    .pixel {
       font-family: "basis33", monospace;
     }
 
-    /* Navbar */
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
     .navbar {
+      width: 100%;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 24px;
-      padding-bottom: 24px;
+
+      padding-bottom: 28px;
+
       flex-shrink: 0;
     }
 
+    .logo-link {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .logo-link:hover {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+
     .logo {
-      width: 28px;
-      height: 28px;
-      display: block;
-      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
     }
 
     .desktop-nav {
       display: none;
+
       align-items: center;
-      gap: 32px;
-      font-size: 14px;
-      letter-spacing: 0.025em;
+
+      gap: clamp(22px, 2.8vw, 44px);
     }
 
-    .desktop-nav a,
-    .mobile-menu-link {
-      transition: opacity 0.2s ease;
+    .desktop-nav a {
+      position: relative;
+
+      font-size: 12px;
+      font-weight: 500;
+
+      letter-spacing: 0.13em;
+
+      color: rgba(255, 255, 255, 0.85);
+
+      transition: color 0.25s ease;
     }
 
-    .desktop-nav a:hover,
-    .menu-toggle:hover,
-    .menu-close:hover {
-      opacity: 0.7;
+    .desktop-nav a::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: #fff;
+
+      transition: width 0.25s ease;
+    }
+
+    .desktop-nav a:hover {
+      color: #fff;
+    }
+
+    .desktop-nav a:hover::after {
+      width: 100%;
     }
 
     .menu-toggle {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.2s ease;
+
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      background: rgba(0, 0, 0, 0.2);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
     }
 
-    /* Meta grid */
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .menu-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* =========================================================
+       TOP INFORMATION
+    ========================================================= */
+
     .meta-grid {
-      margin-top: 16px;
+      width: 100%;
+
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      column-gap: 28px;
+      row-gap: 42px;
+
+      margin-top: 30px;
+
       flex-shrink: 0;
     }
 
@@ -155,282 +296,542 @@
 
     .meta-heading {
       margin: 0;
-      font-size: 18px;
-      line-height: 1.05;
+
+      font-size: clamp(18px, 2vw, 30px);
+
+      line-height: 1.08;
+
       font-weight: 400;
-      letter-spacing: 0.025em;
+
+      letter-spacing: -0.035em;
     }
 
-    .meta-heading .pixel-line {
+    .pixel-heading {
       display: block;
-      margin-top: 2px;
-      font-size: 24px;
-      line-height: 1;
+
+      margin-top: 5px;
+
+      font-family: "basis33", monospace;
+
+      font-size: clamp(22px, 2.5vw, 38px);
+
+      line-height: 0.95;
+
+      letter-spacing: 0.015em;
     }
 
     .asterisk {
-      margin-top: 12px;
-      font-size: 10px;
-      line-height: 1;
+      margin-top: 18px;
+
+      font-family: "basis33", monospace;
+
+      font-size: 11px;
+
       color: rgba(255, 255, 255, 0.5);
     }
 
     .brand-blurb {
-      margin-top: 4px;
-      max-width: 205px;
+      margin-top: 10px;
+
+      max-width: 260px;
+
+      font-family: "basis33", monospace;
+
       font-size: 12px;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.6);
+
+      line-height: 1.65;
+
+      color: rgba(255, 255, 255, 0.63);
     }
 
     .meta-label {
-      margin: 0 0 12px;
+      margin: 0 0 14px;
+
       font-family: "basis33", monospace;
-      font-size: 16px;
+
+      font-size: 13px;
+
       line-height: 1;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+
+      letter-spacing: 0.16em;
+
       color: rgba(255, 255, 255, 0.5);
     }
 
     .meta-copy {
       margin: 0;
-      max-width: 220px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: rgba(255, 255, 255, 0.9);
+
+      max-width: 290px;
+
+      font-size: 13px;
+
+      line-height: 1.65;
+
+      color: rgba(255, 255, 255, 0.84);
     }
 
     .services {
       margin: 0;
       padding: 0;
+
       list-style: none;
-      font-size: 14px;
-      line-height: 1.55;
-      color: rgba(255, 255, 255, 0.9);
+
+      font-size: 13px;
+
+      line-height: 1.65;
+
+      color: rgba(255, 255, 255, 0.84);
     }
 
-    /* Flexible spacer */
+    /* =========================================================
+       FLEXIBLE SPACE
+    ========================================================= */
+
     .spacer {
       flex: 1 1 auto;
-      min-height: 20px;
+
+      min-height: clamp(90px, 17vh, 220px);
     }
 
-    /* Bottom section */
+    /* =========================================================
+       HERO
+    ========================================================= */
+
     .bottom-section {
+      width: 100%;
+
       flex-shrink: 0;
-      padding-bottom: 16px;
     }
 
     .bottom-row {
+      width: 100%;
+
       display: grid;
+
       grid-template-columns: 1fr;
-      gap: 16px;
+
+      gap: 32px;
+
       align-items: end;
     }
 
     .hero-headline {
       margin: 0;
-      font-size: 30px;
-      line-height: 0.72;
+
+      max-width: 1100px;
+
+      font-size:
+        clamp(
+          40px,
+          6.2vw,
+          100px
+        );
+
       font-weight: 400;
-      letter-spacing: 0.025em;
+
+      line-height: 0.94;
+
+      letter-spacing: -0.065em;
+
       text-transform: uppercase;
     }
 
+    /*
+      Each line is independent.
+      This prevents the large text from collapsing
+      into itself on different screen sizes.
+    */
+
+    .hero-line {
+      display: block;
+
+      width: 100%;
+
+      min-height: 1em;
+    }
+
+    /*
+      IMPORTANT FIX:
+      Do NOT use line-height: 0 here.
+      The old zero line-height caused the pixel
+      words to overlap the following lines.
+    */
+
     .pixel-word {
       display: inline-block;
+
       font-family: "basis33", monospace;
-      font-size: 1.25em;
-      line-height: 0;
+
+      font-size: 0.92em;
+
+      line-height: 0.94;
+
       font-weight: 400;
+
+      letter-spacing: 0.01em;
+
       vertical-align: baseline;
+
+      white-space: nowrap;
     }
+
+    /* =========================================================
+       RIGHT HERO CONTENT
+    ========================================================= */
 
     .right-bottom {
       display: flex;
+
       flex-direction: column;
+
+      align-items: flex-start;
+
       justify-content: flex-end;
-      gap: 16px;
+
+      gap: 20px;
     }
 
-    .showreel-button {
-      align-self: flex-start;
+    .connect-button {
       display: inline-flex;
+
       align-items: center;
+
+      justify-content: center;
+
       gap: 12px;
-      padding: 12px 24px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: background-color 0.2s ease;
+
+      min-width: 176px;
+
+      padding: 13px 20px;
+
+      border: 1px solid rgba(255, 255, 255, 0.28);
+
+      background: rgba(0, 0, 0, 0.25);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
     }
 
-    .showreel-button:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .connect-button:hover {
+      background: rgba(255, 255, 255, 0.08);
+
+      border-color: rgba(255, 255, 255, 0.5);
+
+      transform: translateY(-2px);
     }
 
-    .showreel-button svg {
+    .connect-button svg {
       width: 14px;
       height: 14px;
+
       flex-shrink: 0;
     }
 
-    .showreel-label {
-      font-size: 14px;
-      line-height: 1;
-      letter-spacing: 0.08em;
+    .connect-label {
+      font-size: 12px;
+
+      font-weight: 500;
+
+      letter-spacing: 0.13em;
     }
 
+    /* =========================================================
+       CREDENTIALS
+    ========================================================= */
+
     .awards {
-      align-self: flex-start;
       display: flex;
+
       flex-wrap: wrap;
-      align-items: stretch;
-      gap: 8px;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
+
+      gap: 7px;
+
+      width: 100%;
     }
 
     .award {
-      display: flex;
+      display: inline-flex;
+
       align-items: center;
+
       gap: 8px;
-      padding: 8px 12px;
-      background: #0b0b0b;
+
+      min-height: 34px;
+
+      padding: 7px 11px;
+
+      background: rgba(0, 0, 0, 0.62);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
       white-space: nowrap;
     }
 
     .award-main {
-      font-size: 14px;
+      font-size: 11px;
+
       font-weight: 700;
-      letter-spacing: -0.025em;
+
+      letter-spacing: 0.02em;
     }
 
     .award-count {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.5);
+      font-family: "basis33", monospace;
+
+      font-size: 10px;
+
+      color: rgba(255, 255, 255, 0.48);
     }
 
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
     .footer-strip {
-      margin-top: 16px;
+      width: 100%;
+
       display: grid;
+
       grid-template-columns: 1fr;
+
       gap: 8px;
-      padding-top: 16px;
-      font-size: 12px;
-      line-height: 1.4;
-      color: rgba(255, 255, 255, 0.6);
+
+      margin-top: 28px;
+
+      padding-top: 18px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.13);
     }
 
     .footer-strip p {
       margin: 0;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+
+      color: rgba(255, 255, 255, 0.52);
+    }
+
+    .footer-strip p:last-child {
+      text-align: left;
     }
 
     .schedule-link {
-      color: rgb(239, 68, 68);
+      color: rgba(255, 255, 255, 0.86);
+
       transition: color 0.2s ease;
     }
 
     .schedule-link:hover {
-      color: rgb(248, 113, 113);
+      color: #fff;
     }
 
-    /* Mobile menu */
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
     .mobile-menu {
       position: fixed;
+
       inset: 0;
-      z-index: 50;
+
+      z-index: 100;
+
       display: flex;
+
       flex-direction: column;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+
+      padding: 24px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.05),
+          transparent 38%
+        ),
+        rgba(0, 0, 0, 0.97);
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
       opacity: 0;
+
+      visibility: hidden;
+
       pointer-events: none;
+
       transition:
-        opacity 500ms cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.4s ease,
+        visibility 0.4s ease;
     }
 
     .mobile-menu.open {
       opacity: 1;
+
+      visibility: visible;
+
       pointer-events: auto;
     }
 
     .mobile-menu-header {
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      padding: 24px;
-      flex-shrink: 0;
     }
 
     .menu-close {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
-      transition: opacity 0.2s ease;
+
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.08);
+
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .menu-close svg {
+      width: 20px;
+      height: 20px;
     }
 
     .mobile-menu-nav {
       flex: 1;
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       justify-content: center;
-      gap: 32px;
+
+      gap: 28px;
     }
 
     .mobile-menu-link {
-      font-size: 24px;
+      position: relative;
+
+      font-size: clamp(26px, 8vw, 44px);
+
+      font-weight: 400;
+
       line-height: 1;
-      letter-spacing: 0.12em;
+
+      letter-spacing: -0.035em;
+
       opacity: 0;
-      transform: translateY(16px);
+
+      transform: translateY(20px);
+
       transition:
-        opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
-        transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .mobile-menu.open .mobile-menu-link {
       opacity: 1;
+
       transform: translateY(0);
     }
 
+    .mobile-menu.open .mobile-menu-link:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+
+    .mobile-menu.open .mobile-menu-link:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .mobile-menu.open .mobile-menu-link:nth-child(3) {
+      transition-delay: 0.15s;
+    }
+
+    .mobile-menu.open .mobile-menu-link:nth-child(4) {
+      transition-delay: 0.2s;
+    }
+
+    .mobile-menu.open .mobile-menu-link:nth-child(5) {
+      transition-delay: 0.25s;
+    }
+
+    .mobile-menu.open .mobile-menu-link:nth-child(6) {
+      transition-delay: 0.3s;
+    }
+
+    .mobile-menu-link::after {
+      content: "";
+
+      position: absolute;
+
+      left: 50%;
+      bottom: -8px;
+
+      width: 0;
+      height: 1px;
+
+      background: #fff;
+
+      transform: translateX(-50%);
+
+      transition: width 0.3s ease;
+    }
+
+    .mobile-menu-link:hover::after {
+      width: 50%;
+    }
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
+
     @media (min-width: 640px) {
+
       .content {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-top: 28px;
+        padding-bottom: 34px;
       }
 
       .meta-grid {
-        gap: 24px;
+        column-gap: 40px;
       }
 
-      .hero-headline {
-        font-size: 36px;
+      .bottom-row {
+        gap: 40px;
       }
 
       .right-bottom {
-        gap: 24px;
-      }
+        flex-direction: row;
 
-      .award {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
+        align-items: flex-end;
 
-      .award-main {
-        font-size: 16px;
+        justify-content: space-between;
       }
 
       .footer-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 20px;
+        grid-template-columns: 1fr 1fr;
+
+        margin-top: 30px;
       }
 
       .footer-strip p:last-child {
@@ -438,11 +839,11 @@
       }
     }
 
+    /* =========================================================
+       DESKTOP
+    ========================================================= */
+
     @media (min-width: 768px) {
-      .content {
-        padding-left: 40px;
-        padding-right: 40px;
-      }
 
       .desktop-nav {
         display: flex;
@@ -452,12 +853,20 @@
         display: none;
       }
 
-      .meta-heading {
-        font-size: 20px;
-      }
+      .meta-grid {
+        grid-template-columns:
+          repeat(4, minmax(0, 1fr));
 
-      .meta-heading .pixel-line {
-        font-size: 30px;
+        column-gap:
+          clamp(
+            24px,
+            3vw,
+            52px
+          );
+
+        row-gap: 0;
+
+        margin-top: 34px;
       }
 
       .meta-column:nth-child(2),
@@ -466,249 +875,593 @@
       }
 
       .hero-headline {
-        font-size: 48px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .content {
-        padding-left: 56px;
-        padding-right: 56px;
-      }
-
-      .background-video {
-        transform: scale(1.2);
-      }
-
-      .meta-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 32px;
+        font-size:
+          clamp(
+            48px,
+            5.8vw,
+            92px
+          );
       }
 
       .bottom-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 24px;
+        grid-template-columns:
+          minmax(0, 1fr)
+          auto;
+
+        gap: 50px;
       }
 
-      .awards {
+      .right-bottom {
+        min-width: 270px;
+
+        flex-direction: column;
+
+        align-items: flex-end;
+      }
+
+      .connect-button {
         align-self: flex-end;
       }
 
-      .hero-headline {
-        font-size: 60px;
+      .awards {
+        justify-content: flex-end;
       }
     }
 
-    @media (min-width: 1280px) {
+    /* =========================================================
+       LARGE DESKTOP
+    ========================================================= */
+
+    @media (min-width: 1200px) {
+
+      .background-video {
+        transform: scale(1.04);
+      }
+
       .hero-headline {
-        font-size: 68px;
+        max-width: 1150px;
+
+        font-size:
+          clamp(
+            58px,
+            5.8vw,
+            100px
+          );
+      }
+
+      .hero-space {
+        min-height: 150px;
+      }
+
+      .right-bottom {
+        min-width: 310px;
       }
     }
 
-    @media (max-width: 360px) {
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 767px) {
+
+      .background-video {
+        object-position: 67% center;
+      }
+
+      .meta-column:nth-child(2),
+      .meta-column:nth-child(4) {
+        text-align: right;
+      }
+
+      .hero-headline {
+        font-size:
+          clamp(
+            38px,
+            10.8vw,
+            64px
+          );
+
+        line-height: 0.95;
+
+        letter-spacing: -0.06em;
+      }
+
+      /*
+        Allow wrapping on phones so long words
+        never get clipped or overlap.
+      */
+
+      .hero-line {
+        white-space: normal;
+      }
+
+      .pixel-word {
+        line-height: 0.95;
+
+        white-space: normal;
+      }
+
+      .right-bottom {
+        align-items: flex-start;
+      }
+
+      .connect-button {
+        width: 100%;
+      }
+
+      .awards {
+        width: 100%;
+      }
+    }
+
+    /* =========================================================
+       SMALL PHONES
+    ========================================================= */
+
+    @media (max-width: 390px) {
+
       .content {
         padding-left: 16px;
         padding-right: 16px;
       }
 
+      .navbar {
+        padding-bottom: 18px;
+      }
+
       .meta-grid {
-        gap: 12px;
+        margin-top: 20px;
+
+        column-gap: 18px;
+
+        row-gap: 30px;
       }
 
       .meta-heading {
-        font-size: 16px;
+        font-size: 17px;
       }
 
-      .meta-heading .pixel-line {
+      .pixel-heading {
         font-size: 21px;
       }
 
-      .meta-label {
-        font-size: 13px;
-      }
-
+      .brand-blurb,
       .meta-copy,
       .services {
-        font-size: 12px;
+        font-size: 11px;
+      }
+
+      .spacer {
+        min-height: 80px;
       }
 
       .hero-headline {
-        font-size: 27px;
+        font-size: 34px;
+
+        line-height: 0.96;
       }
 
       .award {
         padding-left: 9px;
         padding-right: 9px;
       }
+
+      .footer-strip p {
+        font-size: 10px;
+      }
+    }
+
+    /* =========================================================
+       ACCESSIBILITY
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
+
   <main class="page">
+
+    <!-- =====================================================
+         BACKGROUND VIDEO
+    ====================================================== -->
 
     <video
       class="background-video"
-      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260725_114042_d2ed2a89-f2fa-449b-9609-da456344257b.mp4"
       autoplay
       muted
       loop
       playsinline
-    ></video>
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260725_114042_d2ed2a89-f2fa-449b-9609-da456344257b.mp4"
+        type="video/mp4"
+      />
+    </video>
 
-    <div class="content">
+    <div class="video-overlay"></div>
+    <div class="bottom-overlay"></div>
 
-      <!-- NAVBAR -->
+
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <div class="content" id="home">
+
+      <!-- ===================================================
+           NAVIGATION
+      ==================================================== -->
+
       <header class="navbar">
-        <a href="#" aria-label="Anchal Mishra home">
+
+        <a
+          href="#home"
+          class="logo-link"
+          aria-label="Anchal Mishra home"
+        >
+
           <svg
             class="logo"
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
             viewBox="0 0 256 256"
             fill="none"
+            xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
+
             <path
-              d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"
+              d="M160 88L194 34L216 0H256V40L221.5 93.5L200 128H256V256H96V168L64.246 220L40 256H0V216L34 162L56 128H0V0H160V88Z"
               fill="white"
             />
+
           </svg>
+
         </a>
 
-        <nav class="desktop-nav" aria-label="Primary navigation">
-          <a href="#about">ABOUT</a>
-          <a href="#experience">EXPERIENCE</a>
-          <a href="#projects">PROJECTS</a>
-          <a href="#skills">SKILLS</a>
-          <a href="#ai">AI</a>
-          <a href="#contact">TALK</a>
+
+        <nav
+          class="desktop-nav"
+          aria-label="Primary navigation"
+        >
+
+          <a href="#about">
+            ABOUT
+          </a>
+
+          <a href="#experience">
+            EXPERIENCE
+          </a>
+
+          <a href="#projects">
+            PROJECTS
+          </a>
+
+          <a href="#skills">
+            SKILLS
+          </a>
+
+          <a href="#ai">
+            AI
+          </a>
+
+          <a href="#contact">
+            TALK
+          </a>
+
         </nav>
+
 
         <button
           class="menu-toggle"
           id="menuOpen"
-          aria-label="Open menu"
           type="button"
+          aria-label="Open menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
         >
+
           <svg
-            width="24"
-            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="1.7"
             stroke-linecap="round"
             aria-hidden="true"
           >
-            <line x1="4" y1="6" x2="20" y2="6"></line>
-            <line x1="4" y1="12" x2="20" y2="12"></line>
-            <line x1="4" y1="18" x2="20" y2="18"></line>
+
+            <line
+              x1="4"
+              y1="6"
+              x2="20"
+              y2="6"
+            />
+
+            <line
+              x1="4"
+              y1="12"
+              x2="20"
+              y2="12"
+            />
+
+            <line
+              x1="4"
+              y1="18"
+              x2="20"
+              y2="18"
+            />
+
           </svg>
+
         </button>
+
       </header>
 
-      <!-- PROFILE META -->
+
+      <!-- ===================================================
+           INFORMATION GRID
+      ==================================================== -->
+
       <section class="meta-grid">
 
-        <div class="meta-column" id="about">
+        <!-- About -->
+
+        <div
+          class="meta-column"
+          id="about"
+        >
+
           <h2 class="meta-heading">
+
             ANCHAL
-            <span class="pixel-line font-pixel">MISHRA</span>
+
+            <span class="pixel-heading">
+              MISHRA
+            </span>
+
           </h2>
 
-          <div class="asterisk">*</div>
-
-          <div class="brand-blurb font-pixel">
-            AI trainer and content<br />
-            strategist - I combine<br />
-            language, creativity and<br />
-            artificial intelligence
+          <div class="asterisk">
+            *
           </div>
+
+          <p class="brand-blurb">
+
+            AI Trainer and Content
+            Strategist — I combine
+            language, creativity and
+            artificial intelligence.
+
+          </p>
+
         </div>
 
-        <div class="meta-column">
+
+        <!-- Professional Role -->
+
+        <div
+          class="meta-column"
+          id="experience"
+        >
+
           <h2 class="meta-heading">
+
             AI TRAINER &amp;
-            <span class="pixel-line font-pixel">STRATEGIST</span>
+
+            <span class="pixel-heading">
+              STRATEGIST
+            </span>
+
           </h2>
+
         </div>
 
-        <div class="meta-column" id="ai">
-          <p class="meta-label">What I Do</p>
+
+        <!-- What I Do -->
+
+        <div
+          class="meta-column"
+          id="ai"
+        >
+
+          <p class="meta-label">
+            WHAT I DO
+          </p>
 
           <p class="meta-copy">
-            I work at the intersection of AI, language and content to build
-            smarter digital experiences and train AI systems.
+
+            I work at the intersection
+            of AI, language and content
+            to train intelligent systems
+            and create smarter digital
+            experiences.
+
           </p>
+
         </div>
 
-        <div class="meta-column" id="skills">
-          <p class="meta-label">Services</p>
+
+        <!-- Services -->
+
+        <div
+          class="meta-column"
+          id="skills"
+        >
+
+          <p class="meta-label">
+            SERVICES
+          </p>
 
           <ul class="services">
-            <li>AI Training &amp; Evaluation</li>
-            <li>Content Strategy</li>
-            <li>Content Writing</li>
-            <li>Prompt Engineering</li>
-            <li>LLM &amp; Generative AI</li>
-            <li>SEO &amp; Digital Content</li>
+
+            <li>
+              AI Training &amp; Evaluation
+            </li>
+
+            <li>
+              LLM Training
+            </li>
+
+            <li>
+              Prompt Engineering
+            </li>
+
+            <li>
+              Content Strategy
+            </li>
+
+            <li>
+              Content Writing
+            </li>
+
+            <li>
+              SEO &amp; Digital Content
+            </li>
+
           </ul>
+
         </div>
 
       </section>
 
+
+      <!-- ===================================================
+           FLEXIBLE SPACE
+      ==================================================== -->
+
       <div class="spacer"></div>
 
-      <!-- BOTTOM SECTION -->
-      <section class="bottom-section">
+
+      <!-- ===================================================
+           HERO SECTION
+      ==================================================== -->
+
+      <section
+        class="bottom-section"
+        id="projects"
+      >
 
         <div class="bottom-row">
 
+
+          <!-- Main Hero -->
+
           <div>
+
             <h1 class="hero-headline">
-              I TURN WORDS<br />
-              INTO <span class="pixel-word">INTELLIGENCE</span><br />
-              AND IDEAS INTO<br />
-              <span class="pixel-word">EXPERIENCES</span>
+
+              <span class="hero-line">
+                I TURN WORDS
+              </span>
+
+              <span class="hero-line">
+
+                INTO
+
+                <span class="pixel-word">
+                  INTELLIGENCE
+                </span>
+
+              </span>
+
+              <span class="hero-line">
+                AND IDEAS INTO
+              </span>
+
+              <span class="hero-line">
+
+                <span class="pixel-word">
+                  EXPERIENCES
+                </span>
+
+              </span>
+
             </h1>
+
           </div>
+
+
+          <!-- Right Content -->
 
           <div class="right-bottom">
 
+
             <a
-              class="showreel-button"
-              href="mailto:anchalmishra028@gmail.com"
+              class="connect-button"
+              href="mailto:anchalmishra028@gmail.com?subject=Let's%20Connect"
             >
+
               <svg
                 viewBox="0 0 24 24"
-                fill="white"
-                stroke="white"
-                stroke-width="1.5"
+                fill="currentColor"
                 aria-hidden="true"
               >
-                <polygon points="6,3 20,12 6,21"></polygon>
+
+                <path
+                  d="M8 5v14l11-7L8 5z"
+                />
+
               </svg>
 
-              <span class="showreel-label">LET'S CONNECT</span>
+              <span class="connect-label">
+                LET'S CONNECT
+              </span>
+
             </a>
+
 
             <div class="awards">
 
               <div class="award">
-                <span class="award-main">AI</span>
-                <span class="award-count">TRAINING</span>
+
+                <span class="award-main">
+                  AI
+                </span>
+
+                <span class="award-count">
+                  TRAINING
+                </span>
+
               </div>
 
-              <div class="award">
-                <span class="award-main">LLM</span>
-                <span class="award-count">RLHF</span>
-              </div>
 
               <div class="award">
-                <span class="award-main">CONTENT</span>
-                <span class="award-count">4+ YEARS</span>
+
+                <span class="award-main">
+                  LLM
+                </span>
+
+                <span class="award-count">
+                  RLHF
+                </span>
+
+              </div>
+
+
+              <div class="award">
+
+                <span class="award-main">
+                  CONTENT
+                </span>
+
+                <span class="award-count">
+                  4+ YEARS
+                </span>
+
               </div>
 
             </div>
@@ -717,29 +1470,53 @@
 
         </div>
 
-        <footer class="footer-strip" id="contact">
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer
+          class="footer-strip"
+          id="contact"
+        >
 
           <p>
-            Open to freelance, contract or full-time.
+
+            Open to freelance, contract
+            and full-time opportunities.
+
             <a
               href="mailto:anchalmishra028@gmail.com"
               class="schedule-link"
             >
-              Schedule a call
+              Schedule a conversation →
             </a>
+
           </p>
 
+
           <p>
-            AI Trainer &bull; Content Strategist &bull; LLM Specialist
+
+            AI Trainer
+            &nbsp;•&nbsp;
+            Content Strategist
+            &nbsp;•&nbsp;
+            LLM Specialist
+
           </p>
 
         </footer>
 
       </section>
+
     </div>
 
-    <!-- MOBILE MENU -->
-    <div
+
+    <!-- =====================================================
+         MOBILE MENU
+    ====================================================== -->
+
+    <aside
       class="mobile-menu"
       id="mobileMenu"
       aria-hidden="true"
@@ -747,157 +1524,292 @@
 
       <div class="mobile-menu-header">
 
-        <a href="#" aria-label="Anchal Mishra home">
+        <a
+          href="#home"
+          class="logo-link"
+          aria-label="Anchal Mishra home"
+        >
+
           <svg
             class="logo"
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
             viewBox="0 0 256 256"
             fill="none"
+            xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
+
             <path
-              d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"
+              d="M160 88L194 34L216 0H256V40L221.5 93.5L200 128H256V256H96V168L64.246 220L40 256H0V216L34 162L56 128H0V0H160V88Z"
               fill="white"
             />
+
           </svg>
+
         </a>
+
 
         <button
           class="menu-close"
           id="menuClose"
-          aria-label="Close menu"
           type="button"
+          aria-label="Close menu"
         >
+
           <svg
-            width="24"
-            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="1.7"
             stroke-linecap="round"
             aria-hidden="true"
           >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+
+            <line
+              x1="18"
+              y1="6"
+              x2="6"
+              y2="18"
+            />
+
+            <line
+              x1="6"
+              y1="6"
+              x2="18"
+              y2="18"
+            />
+
           </svg>
+
         </button>
 
       </div>
 
-      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+
+      <nav
+        class="mobile-menu-nav"
+        aria-label="Mobile navigation"
+      >
 
         <a
-          class="mobile-menu-link"
           href="#about"
-          data-index="0"
+          class="mobile-menu-link"
         >
           ABOUT
         </a>
 
         <a
-          class="mobile-menu-link"
           href="#experience"
-          data-index="1"
+          class="mobile-menu-link"
         >
           EXPERIENCE
         </a>
 
         <a
-          class="mobile-menu-link"
           href="#projects"
-          data-index="2"
+          class="mobile-menu-link"
         >
           PROJECTS
         </a>
 
         <a
-          class="mobile-menu-link"
           href="#skills"
-          data-index="3"
+          class="mobile-menu-link"
         >
           SKILLS
         </a>
 
         <a
-          class="mobile-menu-link"
           href="#ai"
-          data-index="4"
+          class="mobile-menu-link"
         >
           AI
         </a>
 
         <a
-          class="mobile-menu-link"
           href="#contact"
-          data-index="5"
+          class="mobile-menu-link"
         >
           TALK
         </a>
 
       </nav>
-    </div>
+
+    </aside>
+
   </main>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
 
   <script>
     (function () {
-      const menu = document.getElementById("mobileMenu");
-      const openButton = document.getElementById("menuOpen");
-      const closeButton = document.getElementById("menuClose");
 
-      const links = Array.from(
-        document.querySelectorAll(".mobile-menu-link")
-      );
+      const menu =
+        document.getElementById("mobileMenu");
+
+      const openButton =
+        document.getElementById("menuOpen");
+
+      const closeButton =
+        document.getElementById("menuClose");
+
+      const links =
+        document.querySelectorAll(
+          ".mobile-menu-link"
+        );
+
 
       function openMenu() {
+
         menu.classList.add("open");
-        menu.setAttribute("aria-hidden", "false");
+
+        menu.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+        openButton.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+
         document.body.style.overflow = "hidden";
 
-        links.forEach(function (link, index) {
-          link.style.transitionDelay =
-            (100 + index * 60) + "ms";
-        });
       }
+
 
       function closeMenu() {
-        menu.classList.remove("open");
-        menu.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "hidden";
 
-        links.forEach(function (link) {
-          link.style.transitionDelay = "0ms";
-        });
+        menu.classList.remove("open");
+
+        menu.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        openButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        document.body.style.overflow = "";
+
       }
 
-      openButton.addEventListener("click", openMenu);
-      closeButton.addEventListener("click", closeMenu);
+
+      openButton.addEventListener(
+        "click",
+        openMenu
+      );
+
+
+      closeButton.addEventListener(
+        "click",
+        closeMenu
+      );
+
 
       links.forEach(function (link) {
-        link.addEventListener("click", closeMenu);
+
+        link.addEventListener(
+          "click",
+          closeMenu
+        );
+
       });
 
-      document.addEventListener("keydown", function (event) {
-        if (
-          event.key === "Escape" &&
-          menu.classList.contains("open")
-        ) {
-          closeMenu();
-        }
-      });
 
-      window.addEventListener("resize", function () {
-        if (
-          window.innerWidth >= 768 &&
-          menu.classList.contains("open")
-        ) {
-          closeMenu();
+      document.addEventListener(
+        "keydown",
+        function (event) {
+
+          if (
+            event.key === "Escape" &&
+            menu.classList.contains("open")
+          ) {
+
+            closeMenu();
+
+          }
+
         }
-      });
+      );
+
+
+      window.addEventListener(
+        "resize",
+        function () {
+
+          if (
+            window.innerWidth >= 768 &&
+            menu.classList.contains("open")
+          ) {
+
+            closeMenu();
+
+          }
+
+        }
+      );
+
+
+      /* =====================================================
+         VIDEO AUTOPLAY
+      ====================================================== */
+
+      const video =
+        document.querySelector(
+          ".background-video"
+        );
+
+      if (video) {
+
+        video.muted = true;
+
+        function startVideo() {
+
+          const playPromise =
+            video.play();
+
+          if (
+            playPromise !== undefined
+          ) {
+
+            playPromise.catch(
+              function () {
+                /* Browser autoplay restriction */
+              }
+            );
+
+          }
+
+        }
+
+        startVideo();
+
+
+        document.addEventListener(
+          "visibilitychange",
+          function () {
+
+            if (
+              document.visibilityState ===
+              "visible"
+            ) {
+
+              startVideo();
+
+            }
+
+          }
+        );
+
+      }
+
     })();
   </script>
+
 </body>
 </html>
-```
